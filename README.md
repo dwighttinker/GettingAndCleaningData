@@ -5,19 +5,7 @@ Getting and Cleaning Data Project
 Download the source and unzip its datasets to the default 'UCI HAR Dataset' sub-directory.
 ( https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip )
 
-The directory structure will be:
-                                                        <dir>
-                                                                run_analysis.R
-                                                                <UCI HAR Dataset>
-                                                                        ...
-                                                                <data>
-                                                                        tidy_averages.txt
-                                                                        tidy_data.txt
-                                                           
-
-Download 'run_analysis.R' to the source ZIP's directory.
-
-in RStudio open the 'run_analysis.R' file: 
+Download 'run_analysis.R' to the same directory you downloaded the Zip file.
 
 Set the working directory to the run_analysis.R file's directory:
 from the menu: Session -> Set working directory -> To source file location
