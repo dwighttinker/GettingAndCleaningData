@@ -9,7 +9,8 @@ Download 'run_analysis.R' to the same directory you downloaded the Zip file.
 
 Set the working directory to the run_analysis.R file's directory:
 from the menu: Session -> Set working directory -> To source file location
-or from the command line setwd(<dir>)
+
+or from the command line setwd(&#060;>)
 
 and then run the command: source("run_analysis.R")
 
