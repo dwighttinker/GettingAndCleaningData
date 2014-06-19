@@ -1,23 +1,29 @@
 # Source of data for the project:
 # https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
+cd <- FALSE
+if(!file.exists("features.txt")) {
+    setwd("./UCI HAR Dataset")
+    cd <- TRUE
+}
+
 # 1. Merges the training and the test sets to create one data set.
 
-tmp1 <- read.table("./UCI HAR Dataset/train/X_train.txt")
-tmp2 <- read.table("./UCI HAR Dataset/test/X_test.txt")
+tmp1 <- read.table("./train/X_train.txt")
+tmp2 <- read.table("./test/X_test.txt")
 X <- rbind(tmp1, tmp2)
 
-tmp1 <- read.table("./UCI HAR Dataset/train/subject_train.txt")
-tmp2 <- read.table("./UCI HAR Dataset/test/subject_test.txt")
+tmp1 <- read.table("./train/subject_train.txt")
+tmp2 <- read.table("./test/subject_test.txt")
 S <- rbind(tmp1, tmp2)
 
-tmp1 <- read.table("./UCI HAR Dataset/train/y_train.txt")
-tmp2 <- read.table("./UCI HAR Dataset/test/y_test.txt")
+tmp1 <- read.table("./train/y_train.txt")
+tmp2 <- read.table("./test/y_test.txt")
 Y <- rbind(tmp1, tmp2)
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
-features <- read.table("./UCI HAR Dataset/features.txt")
+features <- read.table("./features.txt")
 features_index <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
 X <- X[, features_index]
 names(X) <- features[features_index, 2]
@@ -26,7 +32,7 @@ names(X) <- tolower(names(X))
 
 # 3. Uses descriptive activity names to name the activities in the data set
 
-activities <- read.table("./UCI HAR Dataset/activity_labels.txt")
+activities <- read.table("./activity_labels.txt")
 activities[, 2] = gsub("_", "", tolower(as.character(activities[, 2])))
 Y[,1] = activities[Y[,1], 2]
 names(Y) <- "activity"
@@ -35,7 +41,7 @@ names(Y) <- "activity"
 
 names(S) <- "subject"
 tidy_data <- cbind(S, Y, X)
-write.table(tidy_data, "./data/tidy_data.txt")
+write.table(tidy_data, "../data/tidy_data.txt")
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
@@ -55,5 +61,5 @@ for (s in 1:numSubjects) {
 		row = row+1
 	}
 }
-write.table(result, "./data/tidy_averages.txt")
-
+write.table(result, "../data/tidy_averages.txt")
+if(cd==TRUE) setwd("../")
